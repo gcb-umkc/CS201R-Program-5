@@ -2,38 +2,40 @@
 #include <iostream>
 using namespace std;
 
-static int goal = 35;
+static int goal = 69;
 int count = 0;
 
-void GameFunction(int numTokens, int turnsLeft, int count) {
+#include <vector>
 
+bool GameFunction(int numTokens, int turnsLeft, int count, vector<int>& path) {
+    count++;
     if (turnsLeft == 0) {
         cout << "Unable to reach number of tokens" << endl;
-        return;
+        return false;
     }
-    else if (numTokens == goal) {   
+    if (numTokens == goal) {   
+        path.push_back(numTokens);
         cout << "Reached " << goal << " tokens at " << count << endl;
-        return;
+        return true;
     }
     else {
-        if (numTokens < goal) {
-            numTokens += 25;
+        if (numTokens % 2 == 0 && GameFunction(numTokens / 2, turnsLeft - 1, count, path)) {
+            path.push_back(numTokens);
         }
-        else {
-            if (numTokens % 2) {
-                numTokens /= 2;
-            }
-            else {
-                numTokens += 25;
-            }
+        if (GameFunction(numTokens + 25, turnsLeft - 1, count, path)) {
+            path.push_back(numTokens);
         }
-        cout << "Tokens Remaining: " << numTokens << endl;
-        count++;
-        GameFunction(numTokens, turnsLeft - 1, count);
     }
 }
 int main()
 {
-    GameFunction(13, 100, 0);
+    vector<int> path;
+    
+    GameFunction(13, 5, 0, path);
+    path.push_back(13);
+
+    for (int i = 0; i < path.size(); i++) {
+        cout << path.at(i) << endl;
+    }
 }
 
