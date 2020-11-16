@@ -1,3 +1,7 @@
+// George Bennett
+// gcbz9k@mail.umkc.edu
+// 11/10/2020
+// CS201R Program 
 
 #include <iostream>
 #include <vector>
@@ -42,15 +46,17 @@ int main()
     int goal;
 
     //Takes user input for the game
-    cout << "Enter the goal amount of tokens: ";
+    cout << "Enter the goal number of tokens: ";
     cin >> goal;
     cout << "Enter the maximum amount of turns: ";
     cin >> numTurns;
-
+    
+    
     //Calls recursive function
     if (GameFunction(goal, 13, numTurns, path)) {
         int turns = path.size() - 2;
-        cout << goal << " found in " << turns << " " << ((turns > 1) ? "turns" : "turn") << endl;
+
+        cout << goal << " tokens found in " << turns << " " << ((turns > 1) ? "turns" : "turn") << "!" << endl;
 
         //Reports the vector in reverse order
         cout << "The path is: " << endl;
