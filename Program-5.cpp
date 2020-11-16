@@ -54,8 +54,18 @@ int main()
     
     //Calls recursive function
     if (GameFunction(goal, 13, numTurns, path)) {
+        //Prunes bad paths
+        while (true) {
+            int i = 0;
+            if (path.at(i) == goal) {
+                break;
+            }
+            else {
+                path.erase(path.begin());
+                i++;
+            }
+        }
         int turns = path.size() - 2;
-
         cout << goal << " tokens found in " << turns << " " << ((turns > 1) ? "turns" : "turn") << "!" << endl;
 
         //Reports the vector in reverse order
